@@ -16,18 +16,20 @@ const schemaFields = computed(() => {
   return Object.entries(schemaRationale.value).map(([name, rationale]) => ({ name, rationale }));
 });
 
+const base = import.meta.env.BASE_URL;
+
 async function fetchPersonasList() {
-  const res = await fetch('personas.json');
+  const res = await fetch(`${base}personas.json`);
   personas.value = await res.json();
 }
 
 async function loadPersona() {
-  const res = await fetch(`${selectedPersona.value}.persona.json`);
+  const res = await fetch(`${base}${selectedPersona.value}.persona.json`);
   currentPersona.value = await res.json();
 }
 
 async function fetchSchemaRationale() {
-  const res = await fetch('schema-rationale.json');
+  const res = await fetch(`${base}schema-rationale.json`);
   schemaRationale.value = await res.json();
 }
 
