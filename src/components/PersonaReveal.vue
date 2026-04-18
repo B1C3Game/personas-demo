@@ -11,26 +11,32 @@
     <div class="persona-emojis">
       <span v-if="emojis.length">{{ emojis.join(' ') }}</span>
     </div>
-    <button v-if="layer === 0" @click="layer = 1" class="sticky-expand-btn">Expand details &gt;</button>
+    <button v-if="layer === 0" @click="layer = 1" class="sticky-expand-btn main-toggle">Expand details &gt;</button>
+    <button v-if="layer > 0" @click="layer = 0" class="sticky-expand-btn main-toggle">Minimize</button>
     <div v-if="layer >= 1" class="persona-details">
       <!-- SOUL SECTION -->
       <section v-if="persona.soul">
-        <h3><span class="heading-emoji">🗣️</span> Soul</h3>
-        <div v-if="persona.soul.voice" class="persona-voice"><strong>Voice:</strong> {{ persona.soul.voice }}</div>
-        <div v-if="persona.soul.principles && persona.soul.principles.length">
-          <strong>Principles:</strong>
-          <ul>
-            <li v-for="p in persona.soul.principles" :key="p">{{ p }}</li>
-          </ul>
-        </div>
-        <div v-if="persona.soul.quotes && persona.soul.quotes.length">
-          <strong>Quotes:</strong>
-          <ul>
-            <li v-for="q in persona.soul.quotes" :key="q.quote">
-              "{{ q.quote }}"<span v-if="q.context"> <em>({{ q.context }})</em></span>
-              <span v-if="q.emotional_weight"> [Weight: {{ q.emotional_weight }}]</span>
-            </li>
-          </ul>
+        <h3 class="expandable-heading" @click="showSoul = !showSoul" style="cursor:pointer;user-select:none;">
+          <span class="heading-emoji">🗣️</span> Soul
+          <span class="expand-arrow">{{ showSoul ? '▼' : '▶' }}</span>
+        </h3>
+        <div v-if="showSoul" class="expandable-content">
+          <div v-if="persona.soul.voice" class="persona-voice"><strong>Voice:</strong> {{ persona.soul.voice }}</div>
+          <div v-if="persona.soul.principles && persona.soul.principles.length">
+            <strong>Principles:</strong>
+            <ul>
+              <li v-for="p in persona.soul.principles" :key="p">{{ p }}</li>
+            </ul>
+          </div>
+          <div v-if="persona.soul.quotes && persona.soul.quotes.length">
+            <strong>Quotes:</strong>
+            <ul>
+              <li v-for="q in persona.soul.quotes" :key="q.quote">
+                "{{ q.quote }}"<span v-if="q.context"> <em>({{ q.context }})</em></span>
+                <span v-if="q.emotional_weight"> [Weight: {{ q.emotional_weight }}]</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
       
@@ -58,8 +64,7 @@
         </div>
       </section>
 
-      <button v-if="layer === 1" @click="layer = 2" class="sticky-expand-btn">Deep dive &gt;</button>
-      <button v-if="layer > 0" @click="layer = 0" class="minimize-btn sticky-expand-btn">Minimize</button>
+      <button v-if="layer === 1" @click="layer = 2" class="deep-dive-btn">Deep dive &gt;</button>
     </div>
     
     <div v-if="layer === 2" class="persona-deep-dive">
@@ -138,7 +143,8 @@ export default {
   },
   data() {
     return {
-      layer: 0
+      layer: 0,
+      showSoul: false
     }
   },
   computed: {
@@ -153,12 +159,28 @@ export default {
 </script>
 
 <style scoped>
-.sticky-expand-btn {
+.sticky-expand-btn.main-toggle {
   position: sticky;
   top: 1.2em;
+  right: 1.2em;
   float: right;
   z-index: 2;
   margin-top: 0;
+  margin-bottom: 0.5em;
+}
+.expandable-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.2em;
+  cursor: pointer;
+  user-select: none;
+}
+.expand-arrow {
+  margin-left: 0.5em;
+  font-size: 1.1em;
+}
+.expandable-content {
+  margin-left: 1.5em;
   margin-bottom: 0.5em;
 }
 .persona-card {
