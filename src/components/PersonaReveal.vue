@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="persona-card">
     <div class="persona-header">
       <h2>{{ persona.meta.name }}</h2>
@@ -33,31 +33,35 @@
           </ul>
         </div>
       </section>
+      
+      <section v-if="persona.mentalization && persona.mentalization.behaviors">
         <h3><span class="heading-emoji">🧠</span> Behaviors</h3>
         <ul>
           <li v-for="b in persona.mentalization.behaviors.slice(0,2)" :key="b.observable">
             {{ b.observable }} <span v-if="b.context">({{ b.context }})</span>
           </li>
         </ul>
+      </section>
 
-      <section>
+      <section v-if="persona.mentalization && persona.mentalization.tensions">
         <h3 class="left-heading"><span class="heading-emoji">⚡</span> Key Tension</h3>
         <div v-if="persona.mentalization.tensions && persona.mentalization.tensions.length" style="margin-bottom:0.05em; text-align:left;">
           {{ persona.mentalization.tensions[0].need1 }} vs. {{ persona.mentalization.tensions[0].need2 }}:
           {{ persona.mentalization.tensions[0].resolution }}
         </div>
       </section>
-      <section>
+      
+      <section v-if="persona.mentalization && persona.mentalization.frictionPoints">
         <h3 class="left-heading"><span class="heading-emoji">🔥</span> Top Friction Point</h3>
         <div v-if="persona.mentalization.frictionPoints && persona.mentalization.frictionPoints.length" style="text-align:left;">
           {{ persona.mentalization.frictionPoints[0].moment }}: {{ persona.mentalization.frictionPoints[0].friction }}
         </div>
       </section>
 
-      </section>
       <button v-if="layer === 1" @click="layer = 2" class="sticky-expand-btn">Deep dive &gt;</button>
       <button v-if="layer > 0" @click="layer = 0" class="minimize-btn sticky-expand-btn">Minimize</button>
     </div>
+    
     <div v-if="layer === 2" class="persona-deep-dive">
       <button @click="layer = 1" class="minimize-btn">Minimize deep dive</button>
       <!-- SCENARIOS SECTION -->
@@ -72,6 +76,8 @@
           </li>
         </ul>
       </section>
+      
+      <section v-if="persona.mentalization && persona.mentalization.behaviors">
         <h3><span class="heading-emoji">🧠</span> All Behaviors</h3>
         <ul>
           <li v-for="b in persona.mentalization.behaviors" :key="b.observable + b.context">
@@ -79,7 +85,8 @@
           </li>
         </ul>
       </section>
-      <section>
+      
+      <section v-if="persona.mentalization && persona.mentalization.goals">
         <h3><span class="heading-emoji">🎯</span> All Goals</h3>
         <ul>
           <li v-for="g in persona.mentalization.goals" :key="g.goal">
@@ -87,7 +94,8 @@
           </li>
         </ul>
       </section>
-      <section>
+      
+      <section v-if="persona.mentalization && persona.mentalization.decisionCriteria">
         <h3><span class="heading-emoji">⚖️</span> All Decision Criteria</h3>
         <ul>
           <li v-for="c in persona.mentalization.decisionCriteria" :key="c.criterion">
@@ -95,8 +103,9 @@
           </li>
         </ul>
       </section>
-      <section>
-        <h3><span class="heading-emoji">🔀</span> Contextual Variations</h3>
+      
+      <section v-if="persona.mentalization && persona.mentalization.contextualVariations">
+        <h3><span class="heading-emoji">🔄</span> Contextual Variations</h3>
         <ul>
           <li><strong>Under Pressure:</strong> {{ persona.mentalization.contextualVariations.underPressure }}</li>
           <li><strong>With Support:</strong> {{ persona.mentalization.contextualVariations.withSupport }}</li>
@@ -104,7 +113,8 @@
           <li><strong>Expert:</strong> {{ persona.mentalization.contextualVariations.expert }}</li>
         </ul>
       </section>
-      <section>
+      
+      <section v-if="persona.evidence">
         <h3><span class="heading-emoji">📑</span> Evidence & Sources</h3>
         <ul>
           <li v-for="s in persona.evidence.sources" :key="'source-' + s">Source: {{ s }}</li>
@@ -133,7 +143,6 @@ export default {
   },
   computed: {
     emojis() {
-      // Example: derive emojis from persona cues (customize as needed)
       const cues = [];
       if (this.persona.identity.corePattern && this.persona.identity.corePattern.match(/efficien/gi)) cues.push('⚡');
       if (this.persona.identity.corePattern && this.persona.identity.corePattern.match(/productiv/gi)) cues.push('🎯');
@@ -171,9 +180,6 @@ section {
 section h3 {
   margin-bottom: 0.15em;
 }
-section {
-  margin-bottom: 0.18rem;
-}
 .persona-context {
   font-size: 0.85rem;
   color: #888;
@@ -208,17 +214,11 @@ button {
 button:hover {
   background: #1a4e8a;
 }
-section {
-  margin-bottom: 0.12rem;
-}
 p, br {
   margin: 0;
   padding: 0;
   line-height: 1.15;
   text-align: left;
-}
-section h3 {
-  margin-bottom: 0.09em;
 }
 ul {
   text-align: left;
