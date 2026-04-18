@@ -71,15 +71,20 @@
       <button @click="layer = 1" class="minimize-btn">Minimize deep dive</button>
       <!-- SCENARIOS SECTION -->
       <section v-if="persona.scenarios && persona.scenarios.length">
-        <h3><span class="heading-emoji">📚</span> Scenarios</h3>
-        <ul>
-          <li v-for="s in persona.scenarios" :key="s.title">
-            <strong>{{ s.title }}</strong>: {{ s.situation }}<br>
-            <em>Action:</em> {{ s.persona_action }}<br>
-            <em>Why:</em> {{ s.why }}<br>
-            <em>Friction:</em> {{ s.friction }}
-          </li>
-        </ul>
+        <h3 class="expandable-heading" @click="showScenarios = !showScenarios" style="cursor:pointer;user-select:none;">
+          <span class="heading-emoji">📚</span> Scenarios
+          <span class="expand-arrow">{{ showScenarios ? '▼' : '▶' }}</span>
+        </h3>
+        <div v-if="showScenarios" class="expandable-content">
+          <ul>
+            <li v-for="s in persona.scenarios" :key="s.title">
+              <strong>{{ s.title }}</strong>: {{ s.situation }}<br>
+              <em>Action:</em> {{ s.persona_action }}<br>
+              <em>Why:</em> {{ s.why }}<br>
+              <em>Friction:</em> {{ s.friction }}
+            </li>
+          </ul>
+        </div>
       </section>
       
       <section v-if="persona.mentalization && persona.mentalization.behaviors">
@@ -144,7 +149,8 @@ export default {
   data() {
     return {
       layer: 0,
-      showSoul: false
+      showSoul: false,
+      showScenarios: false
     }
   },
   computed: {
