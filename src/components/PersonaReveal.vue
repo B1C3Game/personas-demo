@@ -146,7 +146,7 @@
       
       <section v-if="persona.mentalization && persona.mentalization.contextualVariations">
         <h3 class="expandable-heading" @click="showContext = !showContext" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">??</span> Contextual Variations; How they adapt
+          <span class="heading-emoji">🔄</span> Contextual Variations; How they adapt
           <span class="expand-arrow">{{ showContext ? '?' : '?' }}</span>
         </h3>
         <div v-if="showContext" class="expandable-content">
@@ -161,7 +161,7 @@
       
       <section v-if="persona.evidence">
         <h3 class="expandable-heading" @click="showEvidence = !showEvidence" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">??</span> Evidence & Sources; Audit trail
+          <span class="heading-emoji">📁</span> Evidence & Sources; Audit trail
           <span class="expand-arrow">{{ showEvidence ? '?' : '?' }}</span>
         </h3>
         <div v-if="showEvidence" class="expandable-content">
@@ -342,4 +342,5 @@ h3 {
   gap: 0.2em;
 }
 </style>
+
 
