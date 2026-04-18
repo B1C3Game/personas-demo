@@ -43,7 +43,7 @@
   },
   "evidence": {
     "sources": ["Consider interviewing support techs", "Review ticket log data from Q1 2026"],
-    "validated": true,
+    "validated": null,
     "observations": ["Observed in 80% of tickets", "Escalation notes reviewed by Tier 3"],
     "wouldFalsify": ["Majority of escalations lack notes", "Frequent user complaints about unresolved tickets"]
   },
@@ -89,3 +89,4 @@
     "communicationPreference": "Chat for quick issues, email for formal updates."
   }
 }
+
