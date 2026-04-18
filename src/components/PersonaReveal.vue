@@ -79,7 +79,7 @@
         </div>
       </section>
 
-      <button v-if="layer === 1" @click="layer = 2" class="deep-dive-btn">Deep dive &gt;</button>
+      <button v-if="layer === 1" @click="layer = 2" class="sticky-expand-btn main-toggle">Deep dive &gt;</button>
     </div>
     
     <div v-if="layer === 2" class="persona-deep-dive">
@@ -147,7 +147,7 @@
       <section v-if="persona.mentalization && persona.mentalization.contextualVariations">
         <h3 class="expandable-heading" @click="showContext = !showContext" style="cursor:pointer;user-select:none;">
           <span class="heading-emoji">🔄</span> Contextual Variations; How they adapt
-          <span class="expand-arrow">{{ showContext ? '?' : '?' }}</span>
+          <span class="expand-arrow">{{ showContext ? '\u25BC' : '\u25B6' }}</span>
         </h3>
         <div v-if="showContext" class="expandable-content">
           <ul>
@@ -162,7 +162,7 @@
       <section v-if="persona.evidence">
         <h3 class="expandable-heading" @click="showEvidence = !showEvidence" style="cursor:pointer;user-select:none;">
           <span class="heading-emoji">📁</span> Evidence & Sources; Audit trail
-          <span class="expand-arrow">{{ showEvidence ? '?' : '?' }}</span>
+          <span class="expand-arrow">{{ showEvidence ? '\u25BC' : '\u25B6' }}</span>
         </h3>
         <div v-if="showEvidence" class="expandable-content">
           <ul>
@@ -204,9 +204,14 @@ export default {
   computed: {
     emojis() {
       const cues = [];
-      if (this.persona.identity.corePattern && this.persona.identity.corePattern.match(/efficien/gi)) cues.push('?');
-      if (this.persona.identity.corePattern && this.persona.identity.corePattern.match(/productiv/gi)) cues.push('??');
-      return cues;
+      const cp = this.persona.identity.corePattern || '';
+      if (/efficien/gi.test(cp)) cues.push('🧠');
+      if (/productiv(ity)?/gi.test(cp)) cues.push('⚡');
+      if (/escalat/gi.test(cp)) cues.push('🚫');
+      // Remove duplicates
+      const uniqueCues = [...new Set(cues)];
+      if (uniqueCues.length === 0) uniqueCues.push('💡');
+      return uniqueCues;
     }
   }
 }
