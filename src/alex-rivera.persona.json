@@ -47,8 +47,42 @@
     "observations": ["Observed in 80% of tickets", "Escalation notes reviewed by Tier 3"],
     "wouldFalsify": ["Majority of escalations lack notes", "Frequent user complaints about unresolved tickets"]
   },
+  "soul": {
+    "voice": "Direct, solution-focused, gets frustrated with vagueness.",
+    "quotes": [
+      {
+        "quote": "Documentation is my safety net.",
+        "context": "When onboarding new team members.",
+        "emotional_weight": 4
+      },
+      {
+        "quote": "If I can’t fix it in 10 minutes, I escalate.",
+        "context": "When under time pressure.",
+        "emotional_weight": 3
+      }
+    ],
+    "principles": [
+      "Efficiency beats perfection.",
+      "Clear process saves lives."
+    ]
+  },
+  "scenarios": [
+    {
+      "title": "Password Reset Rush",
+      "situation": "Multiple users are locked out Monday morning.",
+      "persona_action": "Alex uses a bulk reset script and updates the knowledge base.",
+      "why": "To restore productivity quickly and avoid escalation.",
+      "friction": "Script fails for some accounts; Alex documents the exception."
+    },
+    {
+      "title": "Unusual Software Request",
+      "situation": "A user requests non-standard software.",
+      "persona_action": "Alex checks SOPs, consults Tier 3, and documents the process.",
+      "why": "To ensure compliance and traceability.",
+      "friction": "Delay frustrates user; Alex explains the reason."
+    }
+  ],
   "nice_to_have": {
-    "quotes": ["If I can’t fix it in 10 minutes, I escalate.", "Documentation is my safety net."],
     "tools": ["ServiceNow", "Remote Desktop", "Slack", "BMC"],
     "influencers": ["Tier 3 engineers", "SOP authors"],
     "successMetrics": ["First Contact Resolution Rate", "Average Handle Time"],

@@ -11,9 +11,28 @@
     <div class="persona-emojis">
       <span v-if="emojis.length">{{ emojis.join(' ') }}</span>
     </div>
-    <button v-if="layer === 0" @click="layer = 1">Expand details &gt;</button>
+    <button v-if="layer === 0" @click="layer = 1" class="sticky-expand-btn">Expand details &gt;</button>
     <div v-if="layer >= 1" class="persona-details">
-      <section>
+      <!-- SOUL SECTION -->
+      <section v-if="persona.soul">
+        <h3><span class="heading-emoji">🗣️</span> Soul</h3>
+        <div v-if="persona.soul.voice" class="persona-voice"><strong>Voice:</strong> {{ persona.soul.voice }}</div>
+        <div v-if="persona.soul.principles && persona.soul.principles.length">
+          <strong>Principles:</strong>
+          <ul>
+            <li v-for="p in persona.soul.principles" :key="p">{{ p }}</li>
+          </ul>
+        </div>
+        <div v-if="persona.soul.quotes && persona.soul.quotes.length">
+          <strong>Quotes:</strong>
+          <ul>
+            <li v-for="q in persona.soul.quotes" :key="q.quote">
+              "{{ q.quote }}"<span v-if="q.context"> <em>({{ q.context }})</em></span>
+              <span v-if="q.emotional_weight"> [Weight: {{ q.emotional_weight }}]</span>
+            </li>
+          </ul>
+        </div>
+      </section>
         <h3><span class="heading-emoji">🧠</span> Behaviors</h3>
         <ul>
           <li v-for="b in persona.mentalization.behaviors.slice(0,2)" :key="b.observable">
@@ -36,12 +55,23 @@
       </section>
 
       </section>
-      <button v-if="layer === 1" @click="layer = 2">Deep dive &gt;</button>
-      <button v-if="layer > 0" @click="layer = 0" class="minimize-btn">Minimize</button>
+      <button v-if="layer === 1" @click="layer = 2" class="sticky-expand-btn">Deep dive &gt;</button>
+      <button v-if="layer > 0" @click="layer = 0" class="minimize-btn sticky-expand-btn">Minimize</button>
     </div>
     <div v-if="layer === 2" class="persona-deep-dive">
       <button @click="layer = 1" class="minimize-btn">Minimize deep dive</button>
-      <section>
+      <!-- SCENARIOS SECTION -->
+      <section v-if="persona.scenarios && persona.scenarios.length">
+        <h3><span class="heading-emoji">📚</span> Scenarios</h3>
+        <ul>
+          <li v-for="s in persona.scenarios" :key="s.title">
+            <strong>{{ s.title }}</strong>: {{ s.situation }}<br>
+            <em>Action:</em> {{ s.persona_action }}<br>
+            <em>Why:</em> {{ s.why }}<br>
+            <em>Friction:</em> {{ s.friction }}
+          </li>
+        </ul>
+      </section>
         <h3><span class="heading-emoji">🧠</span> All Behaviors</h3>
         <ul>
           <li v-for="b in persona.mentalization.behaviors" :key="b.observable + b.context">
@@ -114,6 +144,14 @@ export default {
 </script>
 
 <style scoped>
+.sticky-expand-btn {
+  position: sticky;
+  top: 1.2em;
+  float: right;
+  z-index: 2;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
 .persona-card {
   border: 1px solid #ddd;
   border-radius: 8px;
