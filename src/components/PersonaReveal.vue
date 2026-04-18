@@ -8,11 +8,15 @@
     <div class="persona-core-pattern persona-voice">
       {{ persona.identity.corePattern }}
     </div>
-    <div class="persona-emojis">
+    <div class="persona-emojis-row">
       <span v-if="emojis.length">{{ emojis.join(' ') }}</span>
     </div>
-    <button v-if="layer === 0" @click="layer = 1" class="sticky-expand-btn main-toggle">Expand details &gt;</button>
-    <button v-if="layer > 0" @click="layer = 0" class="sticky-expand-btn main-toggle">Minimize</button>
+    <div class="expand-btn-row" v-if="layer === 0">
+      <button @click="layer = 1" class="sticky-expand-btn main-toggle">Expand details &gt;</button>
+    </div>
+    <div class="expand-btn-row" v-if="layer > 0">
+      <button @click="layer = 0" class="sticky-expand-btn main-toggle">Minimize</button>
+    </div>
     <div v-if="layer >= 1" class="persona-details">
       <!-- SOUL SECTION -->
       <section v-if="persona.soul">
@@ -83,7 +87,9 @@
     </div>
     
     <div v-if="layer === 2" class="persona-deep-dive">
-      <button @click="layer = 1" class="minimize-btn">Minimize deep dive</button>
+      <div class="expand-btn-row">
+        <button @click="layer = 1" class="sticky-expand-btn main-toggle">Minimize</button>
+      </div>
       <!-- SCENARIOS SECTION -->
       <section v-if="persona.scenarios && persona.scenarios.length">
         <h3 class="expandable-heading" @click="showScenarios = !showScenarios" style="cursor:pointer;user-select:none;">
@@ -207,7 +213,7 @@ export default {
       const cp = this.persona.identity.corePattern || '';
       if (/efficien/gi.test(cp)) cues.push('🧠');
       if (/productiv(ity)?/gi.test(cp)) cues.push('⚡');
-      if (/escalat/gi.test(cp)) cues.push('🚫');
+      // Removed escalat cue (🚫) as requested
       // Remove duplicates
       const uniqueCues = [...new Set(cues)];
       if (uniqueCues.length === 0) uniqueCues.push('💡');
@@ -219,13 +225,11 @@ export default {
 
 <style scoped>
 .sticky-expand-btn.main-toggle {
-  position: sticky;
-  top: 1.2em;
-  right: 1.2em;
-  float: right;
-  z-index: 2;
+  position: static;
+  float: none;
   margin-top: 0;
   margin-bottom: 0.5em;
+  box-shadow: none;
 }
 .expandable-heading {
   display: flex;
@@ -345,6 +349,21 @@ h3 {
   display: flex;
   align-items: center;
   gap: 0.2em;
+}
+.persona-emojis-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1.1em 0 1.1em 0;
+  font-size: 2.1rem;
+}
+.expand-btn-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1.1em 0 1.1em 0;
 }
 </style>
 
