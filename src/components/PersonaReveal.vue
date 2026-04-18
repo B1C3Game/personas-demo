@@ -165,6 +165,19 @@
         </div>
       </section>
       
+      <section v-if="persona.terminology && persona.terminology.length">
+        <h3 class="expandable-heading" @click="showTerminology = !showTerminology" style="cursor:pointer;user-select:none;">
+          <span class="heading-emoji">📝</span> Terminology
+          <span class="expand-arrow">{{ showTerminology ? '▼' : '▶' }}</span>
+        </h3>
+        <div v-if="showTerminology" class="expandable-content">
+          <ul>
+            <li v-for="term in persona.terminology" :key="term">
+              <span style="font-weight:bold">{{ term.split(';')[0] }}</span>: {{ term.split(';').slice(1).join(';').trim() }}
+            </li>
+          </ul>
+        </div>
+      </section>
       <section v-if="persona.evidence">
         <h3 class="expandable-heading" @click="showEvidence = !showEvidence" style="cursor:pointer;user-select:none;">
           <span class="heading-emoji">📁</span> Evidence & Sources; Audit trail
@@ -204,7 +217,8 @@ export default {
       showGoals: false,
       showCriteria: false,
       showContext: false,
-      showEvidence: false
+      showEvidence: false,
+      showTerminology: false
     }
   },
   computed: {
