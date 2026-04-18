@@ -89,6 +89,16 @@
       "friction": "Learning curve for the new app, but understanding the persona helps Alex communicate more effectively and set expectations."
     }
   ],
+  "terminology": [
+    "SOP; Standard Operating Procedure—a documented process or checklist for common issues",
+    "Escalation; Passing a ticket to a higher support tier when it can't be resolved at the current level",
+    "Knowledge Base; Central repository of solutions and troubleshooting guides",
+    "First Contact Resolution; Solving the user's issue on the first interaction, without follow-up",
+    "Ticket; A record of a user issue or request in the helpdesk system",
+    "Tier 3; The highest technical support level, handling the most complex issues",
+    "Root Cause; The underlying reason for a problem, not just the symptom",
+    "Workaround; A temporary solution that restores function without fixing the root cause"
+  ],
   "nice_to_have": {
     "tools": ["ServiceNow", "Remote Desktop", "Slack", "BMC"],
     "influencers": ["Tier 3 engineers", "SOP authors"],
