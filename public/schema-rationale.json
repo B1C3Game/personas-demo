@@ -1,0 +1,11 @@
+{
+  "identity.corePattern": "One sentence capturing how this person decides. Not what they do, but HOW they think.",
+  "mentalization.goals": "Context-specific goals. Different contexts = different priorities. This shows what matters to them in each situation.",
+  "mentalization.behaviors": "Observable actions triggered by specific contexts. Not personality traits, but patterns you can actually see.",
+  "mentalization.frictionPoints": "Where they break. Why they break. This is where design fails for this persona.",
+  "mentalization.tensions": "The competing needs they live in. How do they resolve them? This shows their value hierarchy.",
+  "mentalization.contextualVariations": "Same person, different conditions = different patterns. Shows they're complex, not one-dimensional.",
+  "scenarios": "Concrete situations showing why this persona matters. Not abstract, but real.",
+  "terminology": "Domain vocab they use. If you don't speak their language, you can't mentalize with them.",
+  "evidence": "Where does this come from? What would prove it wrong? Makes the persona auditable, not guesswork."
+}

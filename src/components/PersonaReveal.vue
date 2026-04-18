@@ -6,208 +6,202 @@
       <div class="persona-context">{{ persona.meta.context }}</div>
     </div>
     <div class="persona-core-pattern persona-voice">
-      {{ persona.identity.corePattern }}
-    </div>
-    <div class="persona-emojis-row">
-      <span v-if="emojis.length">{{ emojis.join(' ') }}</span>
-    </div>
-    <div class="expand-btn-row" v-if="layer === 0">
-      <button @click="layer = 1" class="sticky-expand-btn main-toggle">Expand details &gt;</button>
-    </div>
-    <div class="expand-btn-row" v-if="layer > 0">
-      <button @click="layer = 0" class="sticky-expand-btn main-toggle">Minimize</button>
-    </div>
-    <div v-if="layer >= 1" class="persona-details">
-      <!-- SOUL SECTION -->
-      <section v-if="persona.soul">
-        <h3 class="expandable-heading" @click="showSoul = !showSoul" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">🗣️</span> Soul
-          <span class="expand-arrow">{{ showSoul ? '▼' : '▶' }}</span>
-        </h3>
-        <div v-if="showSoul" class="expandable-content">
-          <div v-if="persona.soul.voice" class="persona-voice"><strong>Voice:</strong> {{ persona.soul.voice }}</div>
-          <div v-if="persona.soul.principles && persona.soul.principles.length">
-            <strong>Principles:</strong>
-            <ul>
-              <li v-for="p in persona.soul.principles" :key="p">{{ p }}</li>
-            </ul>
+      <div v-if="layer > 0" class="persona-details">
+        <!-- Always-visible: main four sections -->
+        <section v-if="persona.soul">
+          <h3 class="expandable-heading" @click="showSoul = !showSoul" style="cursor:pointer;user-select:none;">
+            <span class="heading-emoji">🗣️</span> Soul
+            <span class="expand-arrow">{{ showSoul ? '▼' : '▶' }}</span>
+          </h3>
+          <div v-if="showSoul" class="expandable-content">
+            <div v-if="persona.soul.voice" class="persona-voice"><strong>Voice:</strong> {{ persona.soul.voice }}</div>
+            <div v-if="persona.soul.principles && persona.soul.principles.length">
+              <strong>Principles:</strong>
+              <ul>
+                <li v-for="p in persona.soul.principles" :key="p">{{ p }}</li>
+              </ul>
+            </div>
+            <div v-if="persona.soul.quotes && persona.soul.quotes.length">
+              <strong>Quotes:</strong>
+              <ul>
+                <li v-for="q in persona.soul.quotes" :key="q.quote">
+                  "{{ q.quote }}"<span v-if="q.context"> <em>({{ q.context }})</em></span>
+                  <span v-if="q.emotional_weight"> [Weight: {{ q.emotional_weight }}]</span>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div v-if="persona.soul.quotes && persona.soul.quotes.length">
-            <strong>Quotes:</strong>
+        </section>
+
+        <section v-if="persona.mentalization && persona.mentalization.behaviors">
+          <h3 class="expandable-heading" @click="showBehaviors = !showBehaviors" style="cursor:pointer;user-select:none;">
+            <span class="heading-emoji">🧠</span> Behaviors; User stories
+            <span class="expand-arrow">{{ showBehaviors ? '▼' : '▶' }}</span>
+          </h3>
+          <div v-if="showBehaviors" class="expandable-content">
             <ul>
-              <li v-for="q in persona.soul.quotes" :key="q.quote">
-                "{{ q.quote }}"<span v-if="q.context"> <em>({{ q.context }})</em></span>
-                <span v-if="q.emotional_weight"> [Weight: {{ q.emotional_weight }}]</span>
+              <li v-for="b in persona.mentalization.behaviors.slice(0,2)" :key="b.observable">
+                {{ b.observable }} <span v-if="b.context">({{ b.context }})</span>
               </li>
             </ul>
           </div>
-        </div>
-      </section>
-      
-      <section v-if="persona.mentalization && persona.mentalization.behaviors">
-        <h3 class="expandable-heading" @click="showBehaviors = !showBehaviors" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">🧠</span> Behaviors; User stories
-          <span class="expand-arrow">{{ showBehaviors ? '▼' : '▶' }}</span>
-        </h3>
-        <div v-if="showBehaviors" class="expandable-content">
-          <ul>
-            <li v-for="b in persona.mentalization.behaviors.slice(0,2)" :key="b.observable">
-              {{ b.observable }} <span v-if="b.context">({{ b.context }})</span>
-            </li>
-          </ul>
-        </div>
-      </section>
+        </section>
 
-      <section v-if="persona.mentalization && persona.mentalization.tensions">
-        <h3 class="expandable-heading" @click="showTension = !showTension" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">⚡</span> Key Tension; Internal conflicts
-          <span class="expand-arrow">{{ showTension ? '▼' : '▶' }}</span>
-        </h3>
-        <div v-if="showTension" class="expandable-content">
-          <div v-if="persona.mentalization.tensions && persona.mentalization.tensions.length" style="margin-bottom:0.05em; text-align:left;">
-            {{ persona.mentalization.tensions[0].need1 }} vs. {{ persona.mentalization.tensions[0].need2 }}:
-            {{ persona.mentalization.tensions[0].resolution }}
+        <section v-if="persona.mentalization && persona.mentalization.tensions">
+          <h3 class="expandable-heading" @click="showTension = !showTension" style="cursor:pointer;user-select:none;">
+            <span class="heading-emoji">⚡</span> Key Tension; Internal conflicts
+            <span class="expand-arrow">{{ showTension ? '▼' : '▶' }}</span>
+          </h3>
+          <div v-if="showTension" class="expandable-content">
+            <div v-if="persona.mentalization.tensions && persona.mentalization.tensions.length" style="margin-bottom:0.05em; text-align:left;">
+              {{ persona.mentalization.tensions[0].need1 }} vs. {{ persona.mentalization.tensions[0].need2 }}:
+              {{ persona.mentalization.tensions[0].resolution }}
+            </div>
           </div>
-        </div>
-      </section>
-      
-      <section v-if="persona.mentalization && persona.mentalization.frictionPoints">
-        <h3 class="expandable-heading" @click="showFriction = !showFriction" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">🔥</span> Top Friction Point; Where it breaks
-          <span class="expand-arrow">{{ showFriction ? '▼' : '▶' }}</span>
-        </h3>
-        <div v-if="showFriction" class="expandable-content">
-          <div v-if="persona.mentalization.frictionPoints && persona.mentalization.frictionPoints.length" style="text-align:left;">
-            {{ persona.mentalization.frictionPoints[0].moment }}: {{ persona.mentalization.frictionPoints[0].friction }}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <button v-if="layer === 1" @click="layer = 2" class="sticky-expand-btn main-toggle">Deep dive &gt;</button>
-    </div>
-    
-    <div v-if="layer === 2" class="persona-deep-dive">
-      <div class="expand-btn-row">
-        <button @click="layer = 1" class="sticky-expand-btn main-toggle">Minimize</button>
-      </div>
-      <!-- SCENARIOS SECTION -->
-      <section v-if="persona.scenarios && persona.scenarios.length">
-        <h3 class="expandable-heading" @click="showScenarios = !showScenarios" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">📚</span> Scenarios; Real situations
-          <span class="expand-arrow">{{ showScenarios ? '▼' : '▶' }}</span>
-        </h3>
-        <div v-if="showScenarios" class="expandable-content">
-          <ul>
-            <li v-for="s in persona.scenarios" :key="s.title">
-              <strong>{{ s.title }}</strong>: {{ s.situation }}<br>
-              <em>Action:</em> {{ s.persona_action }}<br>
-              <em>Why:</em> {{ s.why }}<br>
-              <em>Friction:</em> {{ s.friction }}
-            </li>
-          </ul>
+        <section v-if="persona.mentalization && persona.mentalization.frictionPoints">
+          <h3 class="expandable-heading" @click="showFriction = !showFriction" style="cursor:pointer;user-select:none;">
+            <span class="heading-emoji">🔥</span> Top Friction Point; Where it breaks
+            <span class="expand-arrow">{{ showFriction ? '▼' : '▶' }}</span>
+          </h3>
+          <div v-if="showFriction" class="expandable-content">
+            <div v-if="persona.mentalization.frictionPoints && persona.mentalization.frictionPoints.length" style="text-align:left;">
+              {{ persona.mentalization.frictionPoints[0].moment }}: {{ persona.mentalization.frictionPoints[0].friction }}
+            </div>
+          </div>
+        </section>
+
+        <!-- Toggle button: always after the 4 main sections -->
+        <div class="expand-btn-row">
+          <button v-if="layer === 1" @click="enterDeepDive" class="sticky-expand-btn main-toggle">Deep dive &gt;</button>
+          <button v-if="layer === 2" @click="layer = 1" class="sticky-expand-btn main-toggle minimize-btn">Minimize</button>
         </div>
-      </section>
-      
-      <section v-if="persona.mentalization && persona.mentalization.behaviors">
-        <h3 class="expandable-heading" @click="showAllBehaviors = !showAllBehaviors" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">🧠</span> All Behaviors; Full list
-          <span class="expand-arrow">{{ showAllBehaviors ? '▼' : '▶' }}</span>
-        </h3>
-        <div v-if="showAllBehaviors" class="expandable-content">
-          <ul>
-            <li v-for="b in persona.mentalization.behaviors" :key="b.observable + b.context">
-              {{ b.observable }} <span v-if="b.context">({{ b.context }})</span>
-            </li>
-          </ul>
-        </div>
-      </section>
-      
-      <section v-if="persona.mentalization && persona.mentalization.goals">
-        <h3 class="expandable-heading" @click="showGoals = !showGoals" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">🎯</span> All Goals; What they want
-          <span class="expand-arrow">{{ showGoals ? '▼' : '▶' }}</span>
-        </h3>
-        <div v-if="showGoals" class="expandable-content">
-          <ul>
-            <li v-for="g in persona.mentalization.goals" :key="g.goal">
-              {{ g.goal }} (Priority: {{ g.priority }}, Context: {{ g.context }})
-            </li>
-          </ul>
-        </div>
-      </section>
-      
-      <section v-if="persona.mentalization && persona.mentalization.decisionCriteria">
-        <h3 class="expandable-heading" @click="showCriteria = !showCriteria" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">⚖️</span> All Decision Criteria; How they decide
-          <span class="expand-arrow">{{ showCriteria ? '▼' : '▶' }}</span>
-        </h3>
-        <div v-if="showCriteria" class="expandable-content">
-          <ul>
-            <li v-for="c in persona.mentalization.decisionCriteria" :key="c.criterion">
-              {{ c.criterion }} (Weight: {{ c.weight }}, Context: {{ c.context }})
-            </li>
-          </ul>
-        </div>
-      </section>
-      
-      <section v-if="persona.mentalization && persona.mentalization.contextualVariations">
-        <h3 class="expandable-heading" @click="showContext = !showContext" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">🔄</span> Contextual Variations; How they adapt
-          <span class="expand-arrow">{{ showContext ? '\u25BC' : '\u25B6' }}</span>
-        </h3>
-        <div v-if="showContext" class="expandable-content">
-          <ul>
-            <li><strong>Under Pressure:</strong> {{ persona.mentalization.contextualVariations.underPressure }}</li>
-            <li><strong>With Support:</strong> {{ persona.mentalization.contextualVariations.withSupport }}</li>
-            <li><strong>First Time:</strong> {{ persona.mentalization.contextualVariations.firstTime }}</li>
-            <li><strong>Expert:</strong> {{ persona.mentalization.contextualVariations.expert }}</li>
-          </ul>
-        </div>
-      </section>
-      
-      <section v-if="persona.terminology && persona.terminology.length">
-        <h3 class="expandable-heading" @click="showTerminology = !showTerminology" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">📝</span> Terminology
-          <span class="expand-arrow">{{ showTerminology ? '▼' : '▶' }}</span>
-        </h3>
-        <div v-if="showTerminology" class="expandable-content">
-          <ul>
-            <li v-for="term in persona.terminology" :key="term">
-              <span style="font-weight:bold">{{ term.split(';')[0] }}</span>: {{ term.split(';').slice(1).join(';').trim() }}
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section v-if="persona.evidence">
-        <h3 class="expandable-heading" @click="showEvidence = !showEvidence" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">📁</span> Evidence & Sources; Audit trail
-          <span class="expand-arrow">{{ showEvidence ? '\u25BC' : '\u25B6' }}</span>
-        </h3>
-        <div v-if="showEvidence" class="expandable-content">
-          <ul>
-            <li v-for="s in persona.evidence.sources" :key="'source-' + s">Source: {{ s }}</li>
-            <li><span style="color: #444; font-size: 0.85rem;">Validated: {{ persona.evidence.validated ? 'Yes' : 'No' }}</span></li>
-            <li v-for="o in persona.evidence.observations" :key="'obs-' + o">Observation: {{ o }}</li>
-            <li v-for="f in persona.evidence.wouldFalsify" :key="'falsify-' + f">Would falsify: {{ f }}</li>
-          </ul>
-        </div>
-      </section>
-    </div>
-  </div>
+
+        <!-- Deep dive sections: only visible in layer 2 -->
+        <template v-if="layer === 2">
+          <section v-if="persona.scenarios && persona.scenarios.length">
+            <h3 class="expandable-heading" @click="showScenarios = !showScenarios" style="cursor:pointer;user-select:none;">
+              <span class="heading-emoji">📚</span> Scenarios; Real situations
+              <span class="expand-arrow">{{ showScenarios ? '▼' : '▶' }}</span>
+            </h3>
+            <div v-if="showScenarios" class="expandable-content">
+              <ul>
+                <li v-for="s in persona.scenarios" :key="s.title">
+                  <strong>{{ s.title }}</strong>: {{ s.situation }}<br>
+                  <em>Action:</em> {{ s.persona_action }}<br>
+                  <em>Why:</em> {{ s.why }}<br>
+                  <em>Friction:</em> {{ s.friction }}
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section v-if="persona.mentalization && persona.mentalization.behaviors">
+            <h3 class="expandable-heading" @click="showAllBehaviors = !showAllBehaviors" style="cursor:pointer;user-select:none;">
+              <span class="heading-emoji">🧠</span> All Behaviors; Full list
+              <span class="expand-arrow">{{ showAllBehaviors ? '▼' : '▶' }}</span>
+            </h3>
+            <div v-if="showAllBehaviors" class="expandable-content">
+              <ul>
+                <li v-for="b in persona.mentalization.behaviors" :key="b.observable + b.context">
+                  {{ b.observable }} <span v-if="b.context">({{ b.context }})</span>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section v-if="persona.mentalization && persona.mentalization.goals">
+            <h3 class="expandable-heading" @click="showGoals = !showGoals" style="cursor:pointer;user-select:none;">
+              <span class="heading-emoji">🎯</span> All Goals; What they want
+              <span class="expand-arrow">{{ showGoals ? '▼' : '▶' }}</span>
+            </h3>
+            <div v-if="showGoals" class="expandable-content">
+              <ul>
+                <li v-for="g in persona.mentalization.goals" :key="g.goal">
+                  {{ g.goal }} (Priority: {{ g.priority }}, Context: {{ g.context }})
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section v-if="persona.mentalization && persona.mentalization.decisionCriteria">
+            <h3 class="expandable-heading" @click="showCriteria = !showCriteria" style="cursor:pointer;user-select:none;">
+              <span class="heading-emoji">⚖️</span> All Decision Criteria; How they decide
+              <span class="expand-arrow">{{ showCriteria ? '▼' : '▶' }}</span>
+            </h3>
+            <div v-if="showCriteria" class="expandable-content">
+              <ul>
+                <li v-for="c in persona.mentalization.decisionCriteria" :key="c.criterion">
+                  {{ c.criterion }} (Weight: {{ c.weight }}, Context: {{ c.context }})
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section v-if="persona.mentalization && persona.mentalization.contextualVariations">
+            <h3 class="expandable-heading" @click="showContext = !showContext" style="cursor:pointer;user-select:none;">
+              <span class="heading-emoji">🔄</span> Contextual Variations; How they adapt
+              <span class="expand-arrow">{{ showContext ? '\u25BC' : '\u25B6' }}</span>
+            </h3>
+            <div v-if="showContext" class="expandable-content">
+              <ul>
+                <li><strong>Under Pressure:</strong> {{ persona.mentalization.contextualVariations.underPressure }}</li>
+                <li><strong>With Support:</strong> {{ persona.mentalization.contextualVariations.withSupport }}</li>
+                <li><strong>First Time:</strong> {{ persona.mentalization.contextualVariations.firstTime }}</li>
+                <li><strong>Expert:</strong> {{ persona.mentalization.contextualVariations.expert }}</li>
+              </ul>
+            </div>
+          </section>
+
+          <section v-if="persona.terminology && persona.terminology.length">
+            <h3 class="expandable-heading" @click="showTerminology = !showTerminology" style="cursor:pointer;user-select:none;">
+              <span class="heading-emoji">📝</span> Terminology
+              <span class="expand-arrow">{{ showTerminology ? '▼' : '▶' }}</span>
+            </h3>
+            <div v-if="showTerminology" class="expandable-content">
+              <ul>
+                <li v-for="term in persona.terminology" :key="term">
+                  <span style="font-weight:bold">{{ term.split(';')[0] }}</span>: {{ term.split(';').slice(1).join(';').trim() }}
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section v-if="persona.evidence">
+            <h3 class="expandable-heading" @click="showEvidence = !showEvidence" style="cursor:pointer;user-select:none;">
+              <span class="heading-emoji">📁</span> Evidence & Sources; Audit trail
+              <span class="expand-arrow">{{ showEvidence ? '\u25BC' : '\u25B6' }}</span>
+            </h3>
+            <div v-if="showEvidence" class="expandable-content">
+              <ul>
+                <li v-for="s in persona.evidence.sources" :key="'source-' + s">Source: {{ s }}</li>
+                <li><span style="color: #444; font-size: 0.85rem;">Validated: {{ persona.evidence.validated ? 'Yes' : 'No' }}</span></li>
+                <li v-for="o in persona.evidence.observations" :key="'obs-' + o">Observation: {{ o }}</li>
+                <li v-for="f in persona.evidence.wouldFalsify" :key="'falsify-' + f">Would falsify: {{ f }}</li>
+              </ul>
+            </div>
+          </section>
+
+        </template>
+      </div> <!-- persona-details -->
+    </div> <!-- persona-core-pattern persona-voice -->
+  </div> <!-- persona-card -->
 </template>
 
 <script>
 export default {
   name: 'PersonaReveal',
   props: {
-    persona: {
-      type: Object,
-      required: true
-    }
+      persona: {
+        type: Object,
+        required: true
+      },
+      // schemaRationale prop removed
   },
   data() {
     return {
-      layer: 0,
+      layer: 1,
       showSoul: false,
       showScenarios: false,
       showBehaviors: false,
@@ -218,7 +212,50 @@ export default {
       showCriteria: false,
       showContext: false,
       showEvidence: false,
-      showTerminology: false
+      showTerminology: false,
+      showSchemaGuide: false
+    }
+  },
+  methods: {
+    enterDeepDive() {
+      this.layer = 2;
+      this.showSchemaGuide = false;
+    }
+  },
+  watch: {
+    layer(val) {
+      if (val === 1) {
+        // Expand the first four sections by default
+        this.showSoul = true;
+        this.showBehaviors = true;
+        this.showTension = true;
+        this.showFriction = true;
+        // Collapse deep dive sections
+        this.showScenarios = false;
+        this.showAllBehaviors = false;
+        this.showGoals = false;
+        this.showCriteria = false;
+        this.showContext = false;
+        this.showEvidence = false;
+        this.showTerminology = false;
+      }
+      if (val === 2) {
+        // Keep the first four open, deep dive sections collapsed
+      }
+      if (val === 0) {
+        // Collapse everything
+        this.showSoul = false;
+        this.showBehaviors = false;
+        this.showTension = false;
+        this.showFriction = false;
+        this.showScenarios = false;
+        this.showAllBehaviors = false;
+        this.showGoals = false;
+        this.showCriteria = false;
+        this.showContext = false;
+        this.showEvidence = false;
+        this.showTerminology = false;
+      }
     }
   },
   computed: {
@@ -232,7 +269,8 @@ export default {
       const uniqueCues = [...new Set(cues)];
       if (uniqueCues.length === 0) uniqueCues.push('💡');
       return uniqueCues;
-    }
+    },
+    // schemaFields removed
   }
 }
 </script>
