@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "name": "Maria Lindholm",
+    "role": "Certification Issuer & Test Center Manager",
+    "context": "Remote certification office, high applicant volume, limited on-site IT support, multiple information screens, and testing stations.",
+    "created": "2026-04-18T10:00:00Z",
+    "confidence": 4,
+    "source": "Interview and observation of remote test center managers"
+  },
+  "identity": {
+    "corePattern": "Manages test appointments, distributes certifications, and operates information/testing systems for a wide range of applicants. Excels at customer service and basic IT troubleshooting despite no formal IT background.",
+    "mentalModel": "Sees self as a facilitator and multitasker, balancing customer service with technical problem-solving in a resource-limited environment."
+  },
+  "mentalization": {
+    "goals": [
+      {"goal": "Ensure smooth and fair certification process for all applicants", "context": "Daily operations", "priority": 5},
+      {"goal": "Minimize downtime due to technical issues", "context": "When issues arise", "priority": 4},
+      {"goal": "Maintain high satisfaction among applicants", "context": "All interactions", "priority": 4},
+      {"goal": "Efficiently manage appointments and records", "context": "Ongoing", "priority": 3}
+    ],
+    "decisionCriteria": [
+      {"criterion": "Applicant satisfaction", "weight": 5, "context": "All interactions"},
+      {"criterion": "System uptime", "weight": 4, "context": "Technical issues"},
+      {"criterion": "Fairness and compliance", "weight": 4, "context": "Certification process"}
+    ],
+    "behaviors": [
+      {"observable": "Schedules and manages test appointments", "context": "Daily", "frequency": "frequent", "triggers": ["new applicant"]},
+      {"observable": "Operates and updates information/testing software", "context": "As needed", "frequency": "frequent", "triggers": ["system update"]},
+      {"observable": "Troubleshoots basic hardware/software issues", "context": "When issues arise", "frequency": "occasional", "triggers": ["system error"]},
+      {"observable": "Provides customer service to all ages", "context": "All interactions", "frequency": "frequent", "triggers": ["applicant question"]}
+    ],
+    "frictionPoints": [
+      {"moment": "Limited on-site IT support", "friction": "Delays in resolving technical issues", "rootCause": "Remote location", "contextual": true},
+      {"moment": "High applicant volume", "friction": "Time pressure and multitasking stress", "rootCause": "Staffing limits", "contextual": true},
+      {"moment": "Applicants unfamiliar with process", "friction": "Communication challenges", "rootCause": "Diverse backgrounds", "contextual": true}
+    ],
+    "tensions": [
+      {"need1": "Customer service", "need2": "Technical troubleshooting", "resolution": "Balances both, prioritizing applicant experience unless critical system failure"}
+    ],
+    "contextualVariations": {
+      "underPressure": "Focuses on essential tasks, may defer non-critical issues.",
+      "withSupport": "Handles more complex technical issues.",
+      "firstTime": "Double-checks procedures and seeks remote help.",
+      "expert": "Mentors new staff and optimizes workflows."
+    }
+  },
+  "evidence": {
+    "sources": [
+      "Interview with remote test center managers, 2025",
+      "Site visit to certification office, 2024"
+    ],
+    "validated": null,
+    "observations": [
+      "Managers often double as IT support and must handle a wide range of applicant needs.",
+      "High applicant turnover and frequent minor technical issues observed."
+    ],
+    "wouldFalsify": [
+      "Applicants frequently dissatisfied with process",
+      "Technical issues cause repeated cancellations"
+    ]
+  },
+  "soul": {
+    "voice": "Patient, clear, and supportive. Explains procedures simply and reassures anxious applicants.",
+    "quotes": [
+      {
+        "quote": "We make sure everyone leaves with a fair chance, no matter their background.",
+        "context": "When asked about applicant diversity.",
+        "emotional_weight": 5
+      },
+      {
+        "quote": "If the computer freezes, I try everything I know before calling for help.",
+        "context": "On handling technical issues.",
+        "emotional_weight": 4
+      }
+    ]
+  }
+}

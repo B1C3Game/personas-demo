@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "name": "Alex Rivera",
+    "role": "IT Support Technician",
+    "context": "Enterprise Service Desk, Tier 2",
+    "created": "2026-04-18T10:00:00Z",
+    "confidence": 4,
+    "source": "Composite: interviews, ticket logs, observation"
+  },
+  "identity": {
+    "corePattern": "Prioritizes restoring user productivity with minimal escalation.",
+    "mentalModel": "Sees self as a problem-solver and gatekeeper for technical issues; values efficiency and clear process."
+  },
+  "mentalization": {
+    "goals": [
+      {"goal": "Resolve user issues quickly", "context": "During business hours", "priority": 5},
+      {"goal": "Minimize escalations", "context": "When possible", "priority": 4},
+      {"goal": "Maintain documentation accuracy", "context": "After ticket closure", "priority": 3}
+    ],
+    "decisionCriteria": [
+      {"criterion": "Impact on user productivity", "weight": 5, "context": "All incidents"},
+      {"criterion": "Availability of workaround", "weight": 4, "context": "Time-sensitive issues"},
+      {"criterion": "Adherence to SOPs", "weight": 3, "context": "Unusual requests"}
+    ],
+    "behaviors": [
+      {"observable": "Follows troubleshooting scripts", "context": "First contact", "frequency": "default", "triggers": ["new ticket"]},
+      {"observable": "Escalates only with full notes", "context": "Complex issues", "frequency": "occasional", "triggers": ["SOP not sufficient"]},
+      {"observable": "Documents solutions in knowledge base", "context": "After resolution", "frequency": "frequent", "triggers": ["ticket closed"]}
+    ],
+    "frictionPoints": [
+      {"moment": "Multiple urgent tickets", "friction": "Task switching delays", "rootCause": "Overload", "contextual": true},
+      {"moment": "Incomplete escalation notes", "friction": "Pushback from Tier 3", "rootCause": "Time pressure", "contextual": true}
+    ],
+    "tensions": [
+      {"need1": "Speed", "need2": "Thoroughness", "resolution": "Defaults to speed unless compliance is at risk"}
+    ],
+    "contextualVariations": {
+      "underPressure": "Relies more on scripts, less on creative troubleshooting.",
+      "withSupport": "More likely to ask for peer input before escalating.",
+      "firstTime": "Double-checks SOPs and knowledge base.",
+      "expert": "Handles exceptions with judgment, may skip steps if confident."
+    }
+  },
+  "evidence": {
+    "sources": ["Consider interviewing support techs", "Review ticket log data from Q1 2026"],
+    "validated": null,
+    "observations": ["Observed in 80% of tickets", "Escalation notes reviewed by Tier 3"],
+    "wouldFalsify": ["Majority of escalations lack notes", "Frequent user complaints about unresolved tickets"]
+  },
+  "soul": {
+    "voice": "Direct, solution-focused, gets frustrated with vagueness.",
+    "quotes": [
+      {
+        "quote": "Documentation is my safety net.",
+        "context": "When onboarding new team members.",
+        "emotional_weight": 4
+      },
+      {
+        "quote": "If I can’t fix it in 10 minutes, I escalate.",
+        "context": "When under time pressure."
+      }
+    ]
+  }
+}

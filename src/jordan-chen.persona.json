@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "name": "Jordan Chen",
+    "role": "Project Manager",
+    "context": "Cross-functional SaaS teams",
+    "created": "2026-04-18T10:00:00Z",
+    "confidence": 4,
+    "source": "Interviews with project managers in SaaS companies"
+  },
+  "identity": {
+    "corePattern": "Seeks consensus through structured dialogue and data."
+  },
+  "mentalization": {
+    "goals": [
+      {"goal": "Facilitate team alignment", "context": "Sprint planning", "priority": 5},
+      {"goal": "Ensure measurable progress", "context": "Weekly reviews", "priority": 4}
+    ],
+    "behaviors": [
+      {"observable": "Schedules regular check-ins", "context": "Remote teams"},
+      {"observable": "Documents decisions", "context": "After meetings"},
+      {"observable": "Asks clarifying questions", "context": "During discussions"}
+    ],
+    "frictionPoints": [
+      {"moment": "Ambiguity in roles", "friction": "Team confusion", "rootCause": "Unclear responsibilities", "contextual": true},
+      {"moment": "Lack of feedback loops", "friction": "Missed improvements", "rootCause": "No retrospectives", "contextual": true}
+    ],
+    "tensions": [
+      {"need1": "Speed", "need2": "Thoroughness", "resolution": "Balances based on project phase"},
+      {"need1": "Individual autonomy", "need2": "Group cohesion", "resolution": "Facilitates open dialogue"}
+    ],
+    "contextualVariations": {
+      "underPressure": "Relies on structured agendas.",
+      "withSupport": "Delegates more decisions.",
+      "firstTime": "Seeks mentorship from experienced PMs.",
+      "expert": "Mentors others and refines processes."
+    }
+  },
+  "scenarios": [
+    {"title": "Onboarding a new team member", "situation": "A new developer joins mid-sprint.", "persona_action": "Schedules intro meeting and shares onboarding doc.", "why": "Accelerate integration.", "friction": "Time zone mismatch."},
+    {"title": "Resolving a project roadblock", "situation": "Blocked by missing API.", "persona_action": "Facilitates cross-team sync.", "why": "Unblock progress.", "friction": "Conflicting priorities."}
+  ],
+  "terminology": ["alignment", "retrospective", "deliverable"],
+  "evidence": {
+    "sources": ["Based on interviews with project managers in SaaS companies"],
+    "validated": null,
+    "observations": ["Observed in sprint retrospectives"],
+    "wouldFalsify": ["Team unable to reach consensus", "No documentation of decisions"]
+  }
+}
