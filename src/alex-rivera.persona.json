@@ -80,6 +80,13 @@
       "persona_action": "Alex checks SOPs, consults Tier 3, and documents the process.",
       "why": "To ensure compliance and traceability.",
       "friction": "Delay frustrates user; Alex explains the reason."
+    },
+    {
+      "title": "Unknown Application, Known Persona",
+      "situation": "Alex receives a ticket for an application he hasn't seen before. The ticket specifies the user's persona.",
+      "persona_action": "Alex reads the persona profile to understand the user's typical goals and pain points before starting troubleshooting.",
+      "why": "To tailor support to the user's expectations and avoid common pitfalls.",
+      "friction": "Learning curve for the new app, but understanding the persona helps Alex communicate more effectively and set expectations."
     }
   ],
   "nice_to_have": {
