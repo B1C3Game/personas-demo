@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="persona-card">
     <div class="persona-header">
       <h2>{{ persona.meta.name }}</h2>
@@ -17,8 +17,8 @@
       <!-- SOUL SECTION -->
       <section v-if="persona.soul">
         <h3 class="expandable-heading" @click="showSoul = !showSoul" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">???</span> Soul
-          <span class="expand-arrow">{{ showSoul ? '?' : '?' }}</span>
+          <span class="heading-emoji">🗣️</span> Soul
+          <span class="expand-arrow">{{ showSoul ? '▼' : '▶' }}</span>
         </h3>
         <div v-if="showSoul" class="expandable-content">
           <div v-if="persona.soul.voice" class="persona-voice"><strong>Voice:</strong> {{ persona.soul.voice }}</div>
@@ -42,8 +42,8 @@
       
       <section v-if="persona.mentalization && persona.mentalization.behaviors">
         <h3 class="expandable-heading" @click="showBehaviors = !showBehaviors" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">??</span> Behaviors; User stories
-          <span class="expand-arrow">{{ showBehaviors ? '?' : '?' }}</span>
+          <span class="heading-emoji">🧠</span> Behaviors; User stories
+          <span class="expand-arrow">{{ showBehaviors ? '▼' : '▶' }}</span>
         </h3>
         <div v-if="showBehaviors" class="expandable-content">
           <ul>
@@ -56,8 +56,8 @@
 
       <section v-if="persona.mentalization && persona.mentalization.tensions">
         <h3 class="expandable-heading" @click="showTension = !showTension" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">?</span> Key Tension; Internal conflicts
-          <span class="expand-arrow">{{ showTension ? '?' : '?' }}</span>
+          <span class="heading-emoji">⚡</span> Key Tension; Internal conflicts
+          <span class="expand-arrow">{{ showTension ? '▼' : '▶' }}</span>
         </h3>
         <div v-if="showTension" class="expandable-content">
           <div v-if="persona.mentalization.tensions && persona.mentalization.tensions.length" style="margin-bottom:0.05em; text-align:left;">
@@ -69,8 +69,8 @@
       
       <section v-if="persona.mentalization && persona.mentalization.frictionPoints">
         <h3 class="expandable-heading" @click="showFriction = !showFriction" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">??</span> Top Friction Point; Where it breaks
-          <span class="expand-arrow">{{ showFriction ? '?' : '?' }}</span>
+          <span class="heading-emoji">🔥</span> Top Friction Point; Where it breaks
+          <span class="expand-arrow">{{ showFriction ? '▼' : '▶' }}</span>
         </h3>
         <div v-if="showFriction" class="expandable-content">
           <div v-if="persona.mentalization.frictionPoints && persona.mentalization.frictionPoints.length" style="text-align:left;">
@@ -87,8 +87,8 @@
       <!-- SCENARIOS SECTION -->
       <section v-if="persona.scenarios && persona.scenarios.length">
         <h3 class="expandable-heading" @click="showScenarios = !showScenarios" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">??</span> Scenarios; Real situations
-          <span class="expand-arrow">{{ showScenarios ? '?' : '?' }}</span>
+          <span class="heading-emoji">📚</span> Scenarios; Real situations
+          <span class="expand-arrow">{{ showScenarios ? '▼' : '▶' }}</span>
         </h3>
         <div v-if="showScenarios" class="expandable-content">
           <ul>
@@ -104,8 +104,8 @@
       
       <section v-if="persona.mentalization && persona.mentalization.behaviors">
         <h3 class="expandable-heading" @click="showAllBehaviors = !showAllBehaviors" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">??</span> All Behaviors; Full list
-          <span class="expand-arrow">{{ showAllBehaviors ? '?' : '?' }}</span>
+          <span class="heading-emoji">🧠</span> All Behaviors; Full list
+          <span class="expand-arrow">{{ showAllBehaviors ? '▼' : '▶' }}</span>
         </h3>
         <div v-if="showAllBehaviors" class="expandable-content">
           <ul>
@@ -118,8 +118,8 @@
       
       <section v-if="persona.mentalization && persona.mentalization.goals">
         <h3 class="expandable-heading" @click="showGoals = !showGoals" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">??</span> All Goals; What they want
-          <span class="expand-arrow">{{ showGoals ? '?' : '?' }}</span>
+          <span class="heading-emoji">🎯</span> All Goals; What they want
+          <span class="expand-arrow">{{ showGoals ? '▼' : '▶' }}</span>
         </h3>
         <div v-if="showGoals" class="expandable-content">
           <ul>
@@ -132,8 +132,8 @@
       
       <section v-if="persona.mentalization && persona.mentalization.decisionCriteria">
         <h3 class="expandable-heading" @click="showCriteria = !showCriteria" style="cursor:pointer;user-select:none;">
-          <span class="heading-emoji">??</span> All Decision Criteria; How they decide
-          <span class="expand-arrow">{{ showCriteria ? '?' : '?' }}</span>
+          <span class="heading-emoji">⚖️</span> All Decision Criteria; How they decide
+          <span class="expand-arrow">{{ showCriteria ? '▼' : '▶' }}</span>
         </h3>
         <div v-if="showCriteria" class="expandable-content">
           <ul>
@@ -342,3 +342,4 @@ h3 {
   gap: 0.2em;
 }
 </style>
+
